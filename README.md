@@ -3,7 +3,7 @@
 clone repository
 
 ### MongoDB Setup
-Use initdb.js file to init database and populate data.
+- Use initdb.js file to init database and populate data.
 <details>
 <summary>Example using MongoDB shell</summary>
 <br>
@@ -181,7 +181,7 @@ db.products.insertMany(
 ```
 </details>
 
-Set your database path on `.env` file named `DATABASE_URL`.
+- Set your database path on `.env` file named `DATABASE_URL`.
 
 ### API
 - run `npm install` to installing package
