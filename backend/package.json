@@ -1,0 +1,20 @@
+{
+  "name": "mid-term-backend",
+  "version": "1.0.0",
+  "description": "Mid Term - Fullstack Engineering, GIGIH 3.0, backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node API/server.js",
+    "dev": "nodemon API/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "aqdamzh",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jest": "^29.6.1",
+    "mongoose": "^7.4.1",
+    "nodemon": "^3.0.1"
+  }
+}
