@@ -181,7 +181,7 @@ db.products.insertMany(
 ```
 </details>
 
-- Set your database path on `.env` file named `DATABASE_URL`.
+- Set your database path named `DATABASE_URL` on `.env` file inside backend folder.
 
 ### API
 - run `npm install` to installing package
