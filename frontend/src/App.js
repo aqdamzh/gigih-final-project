@@ -11,7 +11,7 @@ function App() {
     <ChakraProvider>
       <Routes>
       <Route path='/' element={<Gallery />} />
-      <Route path='/video' element={<Detail />} />
+      <Route path='/video/:id' element={<Detail />} />
       </Routes>
     </ChakraProvider>
   );

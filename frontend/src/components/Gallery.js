@@ -29,8 +29,8 @@ function Gallery() {
 
     const [videos, setVideos] = useState([]);
     const navigate = useNavigate();
-    const handleDetail = () => {
-        navigate('/video');
+    const handleDetail = (id) => {
+        navigate(`/video/${id}`);
     }
     useEffect(() => {
             getAllVideos()
@@ -40,7 +40,6 @@ function Gallery() {
     }, []);
     return (
     <Stack direction='column'>
-    {console.log(videos)}
     <Heading>Codingpedia Play</Heading>
     <Wrap p={12} spacing='30px' justify='center' bg='gray.100'>
         {videos.map(
@@ -49,7 +48,7 @@ function Gallery() {
                 <Image objectFit='cover' 
                 src={data.thumbnail} 
                 className={style['videoTumbX']} 
-                onClick={handleDetail} />
+                onClick={() => handleDetail(data._id)} />
             </WrapItem>
             )
         )}
