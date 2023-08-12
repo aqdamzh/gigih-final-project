@@ -20,7 +20,7 @@ import Product from './Product';
 import Video from './Video';
 import Comment from './Comment';
 
-async function getVideo(id) {
+const getVideo = async (id) =>  {
   const url = 'http://localhost:8080/api/videos/' + id;
   const responseData = await fetch(url , {
     method: 'GET'
