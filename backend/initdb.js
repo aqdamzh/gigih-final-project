@@ -2,47 +2,47 @@ db.videos.insertMany(
     [
         {
           "title": "Webinar Career Readiness Workshop",
-          "src": "https://youtu.be/xylvxZFCedc",
+          "src": "https://www.youtube.com/embed/xylvxZFCedc",
           "thumbnail": "https://img.youtube.com/vi/xylvxZFCedc/sddefault.jpg"
         },
         {
           "title": "What Is Innovation Ecosystem?",
-          "src": "https://youtu.be/sjF_u6Qjwuc",
+          "src": "https://www.youtube.com/embed/sjF_u6Qjwuc",
           "thumbnail": "https://img.youtube.com/vi/sjF_u6Qjwuc/sddefault.jpg"
         },
         {
             "title": "We`re Heading Into a New Cold War",
-            "src": "https://youtu.be/72m0cK423-Q",
+            "src": "https://www.youtube.com/embed/72m0cK423-Q",
             "thumbnail": "https://img.youtube.com/vi/72m0cK423-Q/sddefault.jpg"
         },
         {
             "title": "Oppenheimer",
-            "src": "https://youtu.be/uYPbbksJxIg",
+            "src": "https://www.youtube.com/embed/uYPbbksJxIg",
             "thumbnail": "https://img.youtube.com/vi/uYPbbksJxIg/sddefault.jpg"
         },
         {
             "title": "KPK Tetapkan Kepala Basarnas Henri Alfiandi Tersangka Korupsi",
-            "src": "https://youtu.be/dzocRW9e4cY",
+            "src": "https://www.youtube.com/embed/dzocRW9e4cY",
             "thumbnail": "https://img.youtube.com/vi/dzocRW9e4cY/sddefault.jpg"
         },
         {
             "title": "Ngeliat laptop dengan logo ini?",
-            "src": "https://youtu.be/hLXIik8dmdg",
+            "src": "https://www.youtube.com/embed/hLXIik8dmdg",
             "thumbnail": "https://img.youtube.com/vi/hLXIik8dmdg/sddefault.jpg"
         },
         {
             "title": "Nyobain Samsung Galaxy Z Flip5 dan Fold5 Indonesia!",
-            "src": "https://youtu.be/COaAOqIwjfw",
+            "src": "https://www.youtube.com/embed/COaAOqIwjfw",
             "thumbnail": "https://img.youtube.com/vi/COaAOqIwjfw/sddefault.jpg"
         },
         {
             "title": "Sony Xperia 1 Mark V",
-            "src": "https://youtu.be/A0p_sc4PGPE",
+            "src": "https://www.youtube.com/embed/A0p_sc4PGPE",
             "thumbnail": "https://img.youtube.com/vi/A0p_sc4PGPE/sddefault.jpg"
         },
         {
             "title": "Review realme 11 Pro+ Indonesia",
-            "src": "https://youtu.be/N4rqRd9P4p8",
+            "src": "https://www.youtube.com/embed/N4rqRd9P4p8",
             "thumbnail": "https://img.youtube.com/vi/N4rqRd9P4p8/sddefault.jpg"
         }
     ]
