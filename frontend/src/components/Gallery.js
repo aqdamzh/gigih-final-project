@@ -8,10 +8,9 @@ import {
      Heading 
     } from "@chakra-ui/react";
 
-import ImgPng from './videodefault.jpg';
 import { useNavigate } from "react-router-dom";
 
-const getAllVideos = async () => {
+async function getAllVideos() {
     const url = 'http://localhost:8080/api/videos';
     const responseData = await fetch(url, {
         method: 'GET'
@@ -30,30 +29,25 @@ function Gallery() {
 
     const [videos, setVideos] = useState([]);
     const navigate = useNavigate();
-    const mainData = [];
-
-    for(let i=0; i<100; i++){
-      mainData.push(`data ${i}`);
-    }
     const handleDetail = () => {
         navigate('/video');
     }
     useEffect(() => {
-        getAllVideos()
-        .then(data => {
-            setVideos(data);
-        });
+            getAllVideos()
+            .then(data => {
+                setVideos(data);
+            });
     }, []);
     return (
     <Stack direction='column'>
     {console.log(videos)}
     <Heading>Codingpedia Play</Heading>
     <Wrap p={12} spacing='30px' justify='center' bg='gray.100'>
-        {mainData.map(
+        {videos.map(
             (data) => (
             <WrapItem>
                 <Image objectFit='cover' 
-                src={ImgPng} 
+                src={data.thumbnail} 
                 className={style['videoTumbX']} 
                 onClick={handleDetail} />
             </WrapItem>

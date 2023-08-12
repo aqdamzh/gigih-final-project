@@ -2,8 +2,8 @@ db.videos.insertMany(
     [
         {
           "title": "Webinar Career Readiness Workshop",
-          "src": "https://youtu.be/McwACdmce0c",
-          "thumbnail": "https://img.youtube.com/vi/McwACdmce0c/sddefault.jpg"
+          "src": "https://youtu.be/xylvxZFCedc",
+          "thumbnail": "https://img.youtube.com/vi/xylvxZFCedc/sddefault.jpg"
         },
         {
           "title": "What Is Innovation Ecosystem?",
