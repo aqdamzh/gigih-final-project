@@ -9,7 +9,8 @@ import {
     CardHeader,
     Heading,
     Stack,
-    StackDivider
+    StackDivider,
+    Box
   } from '@chakra-ui/react';
   
 import Product from './Product';
@@ -42,7 +43,7 @@ function Detail() {
         <GridItem pl='2' area={'product'}  style={{overflow: "auto"}}>
         <HStack spacing='24px'>
           {mainData.map((data) => 
-                <box><Product name={data}/></box>
+                <Box><Product name={data}/></Box>
           )}
         </HStack>
         </GridItem>

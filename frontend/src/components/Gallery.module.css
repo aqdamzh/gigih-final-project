@@ -1,0 +1,13 @@
+
+.videoTumbX {
+    opacity: 1;
+}
+.videoTumbX:hover {
+    opacity: 0.6;
+    cursor:pointer;
+}
+
+.videoTumbX:active {
+    opacity: 0.8;
+    cursor:grab;
+}
