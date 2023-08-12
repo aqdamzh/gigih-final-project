@@ -1,17 +1,20 @@
 import { 
+    Center,
     Grid, 
     GridItem,
-    List,
-    ListItem,
-    ListIcon,
-    OrderedList,
-    UnorderedList,
-    Wrap,
-    WrapItem,
-    Center
+    HStack,
+    Button,
+    Card,
+    CardBody,
+    CardHeader,
+    Heading,
+    Stack,
+    StackDivider
   } from '@chakra-ui/react';
   
-  import Product from './Product';
+import Product from './Product';
+import Video from './Video';
+import Comment from './Comment';
 
 function Detail() {
     const mainData = [];
@@ -20,38 +23,53 @@ function Detail() {
     }
     return (
     <Grid
-    templateAreas={`"header main"
-                    "nav main"
-                    "nav footer"`}
+    templateAreas={`"main comment"
+                    "product comment"
+                    "product button"`}
     gridTemplateRows={'6fr 2fr 1fr'}
-    gridTemplateColumns={'2fr 1fr'}
+    gridTemplateColumns={'3fr 2fr'}
     h='100vh'
     gap='1'
     color='blackAlpha.700'
     fontWeight='bold'
+    bg='gray.100'
     >
-        <GridItem pl='2' bg='orange.300' area={'header'}>
-          Header
+        {/* video player section */}
+        <GridItem pl='2' area={'main'}>
+          <Video />
         </GridItem>
-        <GridItem pl='2' bg='pink.300' area={'nav'} style={{overflow: "auto"}}>
-          <Wrap spacing='30px' justify='center'>
+        {/* list products section */}
+        <GridItem pl='2' area={'product'}  style={{overflow: "auto"}}>
+        <HStack spacing='24px'>
           {mainData.map((data) => 
-            <WrapItem>
-                <Product name={data}/>
-            </WrapItem>
+                <box><Product name={data}/></box>
           )}
-          </Wrap>
+        </HStack>
         </GridItem>
-        <GridItem pl='2' bg='green.300' area={'main'} style={{overflow: "auto"}}>
-          <UnorderedList>
-            {mainData.map((data) => 
-            <ListItem>{data}</ListItem>
-            )}
-          </UnorderedList>
+        {/* list comments section */}
+        <GridItem px={10} area={'comment'} style={{overflow: "auto"}}>
+        <Card>
+            <CardHeader>
+                <Heading size='md'>Comments</Heading>
+            </CardHeader>
+            <CardBody>
+                <Stack divider={<StackDivider />} spacing='4'>
+                {mainData.map((data) => 
+                    <Comment user={data}/>
+                )}
+                </Stack>
+            </CardBody>
+        </Card>
         </GridItem>
-        <GridItem pl='2' bg='blue.300' area={'footer'}>
-          Footer
+        {/* input comment section */}
+        <GridItem pt={4} area={'button'}>
+        <Center>
+        <Button colorScheme='teal' size='lg'>
+            Input Comment
+        </Button>
+        </Center>
         </GridItem>
+        {/* end section */}
     </Grid>
     );
 }

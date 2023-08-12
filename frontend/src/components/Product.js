@@ -1,42 +1,47 @@
 import { 
     Card, 
-    CardHeader, 
     CardBody, 
     CardFooter,
-    Divider,
     ButtonGroup,
     Button,
     Stack,
     Image,
     Text,
-    Heading
- } from '@chakra-ui/react'
+    Heading,
+    Center
+ } from '@chakra-ui/react';
 
-function Product({name}) {
+ import BoxPng from "./box.png"
+
+function Product({name, image = BoxPng}) {
 
     return (
-    <Card maxW='sm'>
+    <Card direction={{ base: 'column', sm: 'row' }}>
+        <Center size='100px'>
+            <Image
+            src= {image}
+            objectFit='cover'
+            maxW={{ base: '100%', sm: '100px' }}
+            />
+        </Center>
+        <Stack>
         <CardBody>
-
-            <Stack mt='6' spacing='3'>
-            <Heading size='md'>{name}</Heading>
-
-            <Text color='blue.600' fontSize='2xl'>
+            <Heading size='sm'>{name}</Heading>
+            <Text color='blue.600' fontSize='xs'>
                 Rp.450
             </Text>
-            </Stack>
         </CardBody>
-        <Divider />
         <CardFooter>
-            <ButtonGroup spacing='2'>
-            <Button variant='solid' colorScheme='blue'>
+            <ButtonGroup spacing='1'>
+            <Button size='xs' variant='solid' colorScheme='blue'>
                 Buy now
             </Button>
-            <Button variant='ghost' colorScheme='blue'>
+            <Button size='xs' variant='ghost' colorScheme='blue'>
                 Add to cart
             </Button>
             </ButtonGroup>
         </CardFooter>
+        </Stack>
     </Card>
     );
 }
