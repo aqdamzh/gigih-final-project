@@ -6,7 +6,7 @@ class CommentController {
         const videoId = req.params.videoId;
         
         try {
-            const comments = await Comment.find({videoId: videoId});
+            const comments = await Comment.find({videoId: videoId}).sort( { timestamp: -1 } );
             res.json(comments);
         } catch (error) {
             res.status(500).json({message: error.message});
