@@ -4,7 +4,7 @@ import {
     Text
 } from '@chakra-ui/react'
 
-function Comment({user}) {
+function Comment({user, content}) {
 
     return (
         <Box>
@@ -12,7 +12,7 @@ function Comment({user}) {
                 {user}
             </Heading>
             <Text pt='2' fontSize='sm'>
-                See a detailed analysis of all your business clients.
+                {content}
             </Text>
         </Box>
     );

@@ -13,7 +13,7 @@ import {
 
  import BoxPng from "./box.png"
 
-function Product({name, image = BoxPng}) {
+function Product({name, price, image = BoxPng}) {
 
     return (
     <Card direction={{ base: 'column', sm: 'row' }}>
@@ -28,7 +28,7 @@ function Product({name, image = BoxPng}) {
         <CardBody>
             <Heading size='sm'>{name}</Heading>
             <Text color='blue.600' fontSize='xs'>
-                Rp.450
+                Rp.{price}
             </Text>
         </CardBody>
         <CardFooter>

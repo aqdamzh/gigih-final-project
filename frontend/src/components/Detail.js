@@ -14,41 +14,30 @@ import {
   } from '@chakra-ui/react';
 
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import useFetch from "../hooks/useFetch";
 
 import Product from './Product';
 import Video from './Video';
 import Comment from './Comment';
 
-const getVideo = async (id) =>  {
-  const url = 'http://localhost:8080/api/videos/' + id;
-  const responseData = await fetch(url , {
-    method: 'GET'
-  })
-  .then(response => {
-    if(!response.ok){
-      throw new Error(`HTTP Status: ${response.status}`);
-    }else {
-      return response.json();
-    }
-  });
-  return responseData;
-}
-
 function Detail() {
-  const [video, setVideo] = useState('');
   const { id } = useParams();
-  useEffect(() => {
-    getVideo(id)
-    .then((data) => {
-      setVideo(data.src);
-    });
-    console.log(id);
-  }, []);
-  const mainData = [];
-  for(let i=0; i<100; i++){
-    mainData.push("Main");
-  }
+  const { data: videoData, 
+    loading: videoLoading, 
+    error: videoError } = useFetch(`http://localhost:8080/api/videos/${id}`, {
+    method: 'GET'
+  });
+  const { data: productsData, 
+    loading: productsLoading, 
+    error: productsError } = useFetch(`http://localhost:8080/api/videos/${id}/products`, {
+    method: 'GET'
+  });
+  const { data: commentsData, 
+    loading: commentsLoading, 
+    error: commentsError } = useFetch(`http://localhost:8080/api/videos/${id}/comments`, {
+    method: 'GET'
+  });
+
   return (
   <Grid
   templateAreas={`"main comment"
@@ -61,29 +50,29 @@ function Detail() {
   color='blackAlpha.700'
   fontWeight='bold'
   bg='gray.100'
-  >{console.log(video)}
+  >
       {/* video player section */}
       <GridItem pl='2' area={'main'}>
-        <Video src={video}/>
+        {!videoLoading && <Video src={!videoError? videoData.src: ''}/>}
       </GridItem>
       {/* list products section */}
       <GridItem pl='2' area={'product'}  style={{overflow: "auto"}}>
       <HStack spacing='24px'>
-        {mainData.map((data) => 
-              <Box><Product name={data}/></Box>
+        {!productsLoading && productsData.map((data) => 
+              <Box key={data._id}><Product name={data.name} price={data.price}/></Box>
         )}
       </HStack>
       </GridItem>
       {/* list comments section */}
       <GridItem px={10} area={'comment'} style={{overflow: "auto"}}>
-      <Card>
+      <Card minH='100%'>
           <CardHeader>
               <Heading size='md'>Comments</Heading>
           </CardHeader>
           <CardBody>
               <Stack divider={<StackDivider />} spacing='4'>
-              {mainData.map((data) => 
-                  <Comment user={data}/>
+              {!commentsLoading && commentsData.map((data) => 
+                  <Comment key={data._id} user={data.username} content={data.content}/>
               )}
               </Stack>
           </CardBody>

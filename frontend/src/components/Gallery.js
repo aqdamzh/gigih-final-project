@@ -9,6 +9,7 @@ import {
     } from "@chakra-ui/react";
 
 import { useNavigate } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
 
 async function getAllVideos() {
     const url = 'http://localhost:8080/api/videos';
@@ -26,25 +27,20 @@ async function getAllVideos() {
 }
 
 function Gallery() {
-
-    const [videos, setVideos] = useState([]);
+    const {data, loading, error} = useFetch('http://localhost:8080/api/videos', {
+        method: 'GET'
+    });
     const navigate = useNavigate();
     const handleDetail = (id) => {
         navigate(`/video/${id}`);
     }
-    useEffect(() => {
-            getAllVideos()
-            .then(data => {
-                setVideos(data);
-            });
-    }, []);
     return (
     <Stack direction='column'>
     <Heading>Codingpedia Play</Heading>
     <Wrap p={12} spacing='30px' justify='center' bg='gray.100'>
-        {videos.map(
+        {!loading && data.map(
             (data) => (
-            <WrapItem>
+            <WrapItem key={data._id}>
                 <Image objectFit='cover' 
                 src={data.thumbnail} 
                 className={style['videoTumbX']} 
