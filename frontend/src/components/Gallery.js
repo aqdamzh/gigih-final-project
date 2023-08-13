@@ -1,5 +1,4 @@
 import style from "./Gallery.module.css";
-import { useState, useEffect } from "react";
 import {
      Wrap,
      WrapItem,
@@ -11,20 +10,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 
-async function getAllVideos() {
-    const url = 'http://localhost:8080/api/videos';
-    const responseData = await fetch(url, {
-        method: 'GET'
-    })
-    .then( response => {
-        if(!response.ok){
-            throw new Error('HTTP status ' + response.status);
-        }else {
-            return response.json();
-        }
-    });
-    return responseData;
-}
 
 function Gallery() {
     const {data, loading, error} = useFetch('http://localhost:8080/api/videos', {
