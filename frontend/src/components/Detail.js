@@ -10,7 +10,9 @@ import {
     Heading,
     Stack,
     StackDivider,
-    Box
+    Box,
+    Container,
+    useDisclosure
   } from '@chakra-ui/react';
 
 import { useParams } from 'react-router-dom';
@@ -19,6 +21,8 @@ import useFetch from "../hooks/useFetch";
 import Product from './Product';
 import Video from './Video';
 import Comment from './Comment';
+import InputComment from './InputComment';
+import { useNavigate } from 'react-router-dom';
 
 function Detail() {
   const { id } = useParams();
@@ -38,6 +42,30 @@ function Detail() {
     method: 'GET'
   });
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const navigate = useNavigate();
+  const handleInputComment = (body, videoId) => {
+    fetch(`http://localhost:8080/api/videos/${videoId}/comments`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    }).then(res => {
+        if(!res.ok){
+            throw new Error(`HTTP Status: ${res.status}`);
+        }else {
+            return res.json();
+        }
+    }).then(data => {
+        if(data.status === 'success'){
+            onClose();
+            navigate(0);
+        }
+    });
+  }
   return (
   <Grid
   templateAreas={`"main comment"
@@ -81,13 +109,16 @@ function Detail() {
       {/* input comment section */}
       <GridItem pt={4} area={'button'}>
       <Center>
-      <Button colorScheme='teal' size='lg'>
+      <Button colorScheme='teal' size='lg' onClick={onOpen}>
           Input Comment
       </Button>
       </Center>
+      < InputComment videoId={id} handleInput={handleInputComment}
+      isOpen={isOpen} onClose={onClose} />
       </GridItem>
       {/* end section */}
   </Grid>
+  
   );
 }
 
