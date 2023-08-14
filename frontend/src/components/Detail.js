@@ -11,7 +11,6 @@ import {
     Stack,
     StackDivider,
     Box,
-    Container,
     useDisclosure
   } from '@chakra-ui/react';
 
@@ -22,7 +21,6 @@ import Product from './Product';
 import Video from './Video';
 import Comment from './Comment';
 import InputComment from './InputComment';
-import { useNavigate } from 'react-router-dom';
 import useFetchArray from '../hooks/useFetchArray';
 
 function Detail() {
@@ -47,7 +45,6 @@ function Detail() {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const navigate = useNavigate();
   const handleInputComment = (body, videoId) => {
     fetch(`http://localhost:8080/api/videos/${videoId}/comments`, {
         method: 'POST',
