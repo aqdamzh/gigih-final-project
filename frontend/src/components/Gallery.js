@@ -12,7 +12,7 @@ import useFetch from "../hooks/useFetch";
 
 
 function Gallery() {
-    const {data, loading, error} = useFetch('http://localhost:8080/api/videos', {
+    const {data, loading, error} = useFetch('/api/videos', {
         method: 'GET'
     });
     const navigate = useNavigate();

@@ -27,26 +27,26 @@ function Detail() {
   const { id } = useParams();
   const { data: videoData, 
     loading: videoLoading, 
-    error: videoError } = useFetch(`http://localhost:8080/api/videos/${id}`, {
+    error: videoError } = useFetch(`/api/videos/${id}`, {
     method: 'GET'
   });
   const { data: productsData, 
     loading: productsLoading, 
-    error: productsError } = useFetch(`http://localhost:8080/api/videos/${id}/products`, {
+    error: productsError } = useFetch(`/api/videos/${id}/products`, {
     method: 'GET'
   });
   const { data: commentsData, 
     loading: commentsLoading, 
     error: commentsError, 
     update: commentsUpdate } = 
-    useFetchArray(`http://localhost:8080/api/videos/${id}/comments`, {
+    useFetchArray(`/api/videos/${id}/comments`, {
     method: 'GET'
   });
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleInputComment = (body, videoId) => {
-    fetch(`http://localhost:8080/api/videos/${videoId}/comments`, {
+    fetch(`/api/videos/${videoId}/comments`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
