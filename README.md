@@ -1,9 +1,25 @@
-# Installation
+# Run App in Docker
+pull docker image from registry.
+```
+docker pull aqdamzh/gigih-fullstack
+```
+Run container into port 80.
+```
+docker run -d -p 80:80 codingplay-app aqdamzh/gigih-fullstack
+```
+Open browser & access localhost.
+```
+http://localhost
+```
+
+
+# Manual Dev Installation
 
 clone repository
 
 ### MongoDB Setup
-- Use initdb.js file to init database and populate data.
+create mongoDB database.
+- Open backend folder & use initdb.js file to init database and populate data.
 <details>
 <summary>Example using MongoDB shell</summary>
 <br>
@@ -181,12 +197,30 @@ db.products.insertMany(
 ```
 </details>
 
-- Set your database path named `DATABASE_URL` on `.env` file inside backend folder.
-
-### API
-- run `npm install` to installing package
-- run `npm run start` to run with normal nodejs
-- run `npm run dev` to run with nodemon!
+- Set your database path named `MONGO_CONNECTION_STRING` on `.env` file inside backend folder.
+- 
+### API Setup
+Open backend directory.
+```
+npm install
+```
+Run express.
+```
+npm run start
+```
+API running...
+```
+http://localhost:8080
+```
+### UI React JS Setup
+Open frontend directory.
+```
+npm install
+```
+Run React.
+```
+npm run start
+```
 
 # DB Structure
 ![mongoDB-backend-GIGIH](https://github.com/aqdamzh/GIGI-3.0-midterm-backend-app/assets/34984085/61637ba0-673d-48eb-a103-841c3a239e86)
