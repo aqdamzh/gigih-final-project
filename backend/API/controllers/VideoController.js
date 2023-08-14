@@ -1,10 +1,10 @@
-const Video = require('../models/Video');
+const videoService = require('../services/VideoService');
 
 class VideoController {
 
     static async listVideos(req, res) {
         try {
-            const videos = await Video.find();
+            const videos = await videoService.listVideos();
             res.json(videos);
         } catch (error) {
             res.status(500).json({message: error.message});
@@ -14,7 +14,7 @@ class VideoController {
     static async getVideo(req, res) {
         const videoId = req.params.videoId;
         try {
-            const myVideo = await Video.findOne({_id: videoId});
+            const myVideo = await videoService.getVideo(videoId);
             res.json(myVideo);
         } catch (error) {
             res.status(500).json({message: error.message});
@@ -22,14 +22,14 @@ class VideoController {
     }
 
     static async createVideo(req, res) {
-        const newVideo = new Video({
+        const body = {
             title: req.body.title,
             src: req.body.src,
             thumbnail: req.body.thumbnail
-        });
+        };
 
         try {
-            const videoSave = await newVideo.save();
+            const videoSave = await videoService.createVideo(body);
             res.status(201).json(videoSave);
         } catch (error) {
             res.status(400).json({message: error.message});
@@ -38,17 +38,14 @@ class VideoController {
 
     static async updateVideo(req, res) {
         const videoId = req.params.videoId;
-        const {title, src, thumbnail} = req.body;
+        const body = {
+            title: req.body.title,
+            src: req.body.src,
+            thumbnail: req.body.thumbnail
+        };
         try {
-            const upRes = await Video.updateOne({_id: videoId}, {
-                title: title, src: src, thumbnail: thumbnail
-            });
-            if(upRes.matchedCount>0){
-                const myVideo = await Video.findOne({_id: videoId});
-                res.json(myVideo);
-            }else {
-                res.status(404).json({message: "Id not found"});
-            }
+            const myVideo = await videoService.updateVideo(videoId, body);
+            res.json(myVideo);
         } catch (error) {
             res.status(500).json({message: error.message});
         }
@@ -57,7 +54,7 @@ class VideoController {
     static async deleteVideo(req ,res) {
         const videoId = req.params.videoId;
         try {
-            const delRes = await Video.findOneAndDelete({_id: videoId});
+            const delRes = await videoService.deleteVideo(videoId);
             const myResponse = {
                 status: "deleted",
                 video: delRes

@@ -1,25 +1,22 @@
 require('dotenv').config();
-const app = require('./app');
-const mongoose = require('mongoose');
+const express = require('express');
+const cors = require('cors');
+const { connect, disconnect } = require('./config/db.config');
+const videoRoutes = require('./routes/videoRoutes');
 
-const mongoString = process.env.DATABASE_URL;
+connect();
+
+const app = express();
+app.use(cors());
+
+app.use(express.json());
+
+const apiRoutes = express.Router();
+app.use('/api', apiRoutes);
+
+apiRoutes.use('/videos', videoRoutes);
+
 const port = process.env.PORT;
-
-mongoose.connect(mongoString).then(() => {
-    console.log('Connected to database');
-}).catch((err) => {
-    console.log(`Error connection to database. \n${err}`);
-});
-const database = mongoose.connection;
-
-database.on('error', (err) => {
-    console.log(err);
-});
-database.once('connected', () => {
-    console.log('Database connected');
-});
-
-
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });

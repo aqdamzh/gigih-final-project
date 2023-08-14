@@ -1,3 +1,4 @@
+const commentService = require('../services/CommentService');
 const Comment = require('../models/Comment');
 
 class CommentController {
@@ -6,7 +7,7 @@ class CommentController {
         const videoId = req.params.videoId;
         
         try {
-            const comments = await Comment.find({videoId: videoId}).sort( { timestamp: -1 } );
+            const comments = await commentService.listCommentsByVideo(videoId);
             res.json(comments);
         } catch (error) {
             res.status(500).json({message: error.message});
@@ -17,7 +18,7 @@ class CommentController {
         const videoId = req.params.videoId;
         const commentId = req.params.commentId;
         try {
-            const myComment = await Comment.find({_id: commentId, videoId: videoId});
+            const myComment = await commentService.getComment(commentId, videoId);
             res.json(myComment);
         } catch (error) {
             res.status(500).json({message: error.message});
@@ -26,15 +27,15 @@ class CommentController {
 
     static async createComment(req, res) {
         const videoId = req.params.videoId;
-        const newComment = new Comment({
+        const body = {
             username: req.body.username,
             content: req.body.content,
             timestamp: new Date(),
             videoId: videoId
-        });
+        };
 
         try {
-            const commentSave = await newComment.save();
+            const commentSave = await commentService.createComment(body);
             res.status(201).json({
                 status: "success",
                 comment: commentSave
@@ -47,16 +48,12 @@ class CommentController {
     static async updateComment(req, res) {
         const videoId = req.params.videoId;
         const commentId = req.params.commentId;
+        const body = {
+            username: req.body.username, content: req.body.content, timestamp: new Date()
+        }
         try {
-            const upRes = await Comment.updateOne({_id: commentId, videoId: videoId}, {
-                username: req.body.username, content: req.body.content, timestamp: new Date()
-            });
-            if(upRes.matchedCount>0){
-                const myComment = await Comment.findOne({_id: commentId, videoId: videoId});
-                res.json(myComment);
-            }else {
-                res.status(404).json({message: "Id not found"});
-            }
+            const upRes = await commentService.updateComment(commentId, videoId, body);
+            res.json(upRes);
         } catch (error) {
             res.status(500).json({message: error.message});
         }
@@ -66,7 +63,7 @@ class CommentController {
         const videoId = req.params.videoId;
         const commentId = req.params.commentId;
         try {
-            const delRes = await Comment.findOneAndDelete({_id: commentId, videoId: videoId});
+            const delRes = await commentService.deleteComment(commentId, videoId);
             const myResponse = {
                 status: "deleted",
                 comment: delRes
