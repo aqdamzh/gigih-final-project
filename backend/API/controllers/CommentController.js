@@ -1,5 +1,4 @@
 const commentService = require('../services/CommentService');
-const Comment = require('../models/Comment');
 
 class CommentController {
 
