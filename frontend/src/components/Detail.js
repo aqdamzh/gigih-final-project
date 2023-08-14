@@ -23,6 +23,7 @@ import Video from './Video';
 import Comment from './Comment';
 import InputComment from './InputComment';
 import { useNavigate } from 'react-router-dom';
+import useFetchArray from '../hooks/useFetchArray';
 
 function Detail() {
   const { id } = useParams();
@@ -38,7 +39,9 @@ function Detail() {
   });
   const { data: commentsData, 
     loading: commentsLoading, 
-    error: commentsError } = useFetch(`http://localhost:8080/api/videos/${id}/comments`, {
+    error: commentsError, 
+    update: commentsUpdate } = 
+    useFetchArray(`http://localhost:8080/api/videos/${id}/comments`, {
     method: 'GET'
   });
 
@@ -62,7 +65,7 @@ function Detail() {
     }).then(data => {
         if(data.status === 'success'){
             onClose();
-            navigate(0);
+            commentsUpdate();
         }
     });
   }
